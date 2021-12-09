@@ -4,5 +4,4 @@
 /.idea
 /.bsp
 /.isabelle-home
-/component/target/
-/component/classes/
+/term-explorer-component.jar

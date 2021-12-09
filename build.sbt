@@ -7,12 +7,18 @@ lazy val isabelleHome = file(IO.read(file(".isabelle-home")).trim)
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
-lazy val root = project.in(file("."))
-  .settings(
-    scalaVersion := "2.13.7",
-    libraryDependencies += "de.unruh" %% "scala-isabelle" % "master-SNAPSHOT",
-  )
+def assertExists(file: File) = { assert(file.exists(), file); file }
 
+scalaVersion := "2.13.5"
+
+Compile / packageBin / artifactPath := baseDirectory.value / "term-explorer-component.jar"
+
+libraryDependencies += "de.unruh" %% "scala-isabelle" % "master-SNAPSHOT"
+Compile / unmanagedJars += assertExists(file("../qrhl-tool/scala-isabelle/component/scala-isabelle-component.jar"))
+Compile / unmanagedJars += assertExists(isabelleHome / "lib" / "classes" / "isabelle.jar")
+
+
+/*
 lazy val component = project
   .dependsOn(root)
   .settings(
@@ -25,6 +31,6 @@ lazy val component = project
       (Compile/packageBin).value
     }
   )
-
+*/
 
 

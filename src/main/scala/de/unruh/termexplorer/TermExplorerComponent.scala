@@ -1,12 +1,12 @@
 package de.unruh.termexplorer
 
 import de.unruh.isabelle.control.IsabelleComponent
+import de.unruh.isabelle.control.IsabelleComponent.{isabelle => isabelleInstance}
+import de.unruh.isabelle.pure.Implicits._
 import de.unruh.isabelle.pure.{Context, Term}
 import de.unruh.termexplorer.TermExplorerComponent.showTermExplorer
 import isabelle.Scala.{Fun_Strings, Functions}
 import isabelle.Scala_Project
-import de.unruh.isabelle.control.IsabelleComponent.isabelle
-import de.unruh.isabelle.pure.Implicits._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
