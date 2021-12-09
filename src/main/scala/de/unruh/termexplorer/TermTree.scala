@@ -2,15 +2,14 @@ package de.unruh.termexplorer
 
 import de.unruh.isabelle.control.Isabelle
 import de.unruh.isabelle.control.Isabelle.Setup
-import de.unruh.isabelle.control.IsabelleComponent.isabelle
 import de.unruh.isabelle.pure._
 
 import java.awt.Dimension
-import java.awt.event.{KeyEvent, KeyListener}
+import java.awt.event.{ActionEvent, InputEvent, KeyEvent, KeyListener}
 import java.nio.file.Path
 import java.util
 import javax.swing.tree.TreeNode
-import javax.swing.{JFrame, JScrollPane, JTree, WindowConstants}
+import javax.swing.{AbstractAction, JComponent, JFrame, JScrollPane, JTree, KeyStroke, WindowConstants}
 import scala.annotation.tailrec
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.jdk.CollectionConverters._
@@ -33,10 +32,18 @@ object Viewer {
 
     frame.add(treeView)
 
-    frame.addKeyListener(new KeyListener {
-      override def keyTyped(e: KeyEvent): Unit = println(e)
-      override def keyPressed(e: KeyEvent): Unit = println(e)
-      override def keyReleased(e: KeyEvent): Unit = println(e)
+//    frame.addKeyListener(new KeyListener {
+//      override def keyTyped(e: KeyEvent): Unit = println(e)
+//      override def keyPressed(e: KeyEvent): Unit = println(e)
+//      override def keyReleased(e: KeyEvent): Unit = println(e)
+//    })
+
+    val inputMap = frame.getRootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_DOWN_MASK), "close window")
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "close window")
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0), "close window")
+    frame.getRootPane.getActionMap.put("close window", new AbstractAction() {
+      override def actionPerformed(e: ActionEvent): Unit = frame.dispose()
     })
 
     frame.pack()

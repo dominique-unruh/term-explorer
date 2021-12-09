@@ -3,4 +3,6 @@
 /project/project/target/
 /.idea
 /.bsp
-/term-explorer-component.jar
+/.isabelle-home
+/component/target/
+/component/classes/

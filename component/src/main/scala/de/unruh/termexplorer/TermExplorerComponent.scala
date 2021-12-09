@@ -3,8 +3,8 @@ package de.unruh.termexplorer
 import de.unruh.isabelle.control.IsabelleComponent
 import de.unruh.isabelle.pure.{Context, Term}
 import de.unruh.termexplorer.TermExplorerComponent.showTermExplorer
-import isabelle.{Bytes, Scala_Project}
-import isabelle.Scala.{Fun, Fun_String, Fun_Strings, Functions}
+import isabelle.Scala.{Fun_Strings, Functions}
+import isabelle.Scala_Project
 import de.unruh.isabelle.control.IsabelleComponent.isabelle
 import de.unruh.isabelle.pure.Implicits._
 

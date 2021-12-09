@@ -1,0 +1,7 @@
+# -*- shell-script -*- :mode=shellscript:
+
+for jar in "$COMPONENT"/classes/*.jar; do
+  classpath $jar
+done
+
+isabelle_scala_service de.unruh.termexplorer.TermExplorerComponent
