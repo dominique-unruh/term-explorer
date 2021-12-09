@@ -19,7 +19,7 @@ object TermExplorerComponent {
       val List(contextID, termID) = args
       val context = IsabelleComponent.unsafeMLValueFromNumericID[Context](contextID.toLong).retrieveNow
       val term = IsabelleComponent.unsafeMLValueFromNumericID[Term](termID.toLong).retrieveNow
-      val thread = new Thread(() => Viewer.showViewer(IsabelleComponent.isabelle, context, term))
+      val thread = new Thread(() => DemoWindow.showDemoWindow(context, term))
       thread.setDaemon(true)
       thread.start()
       Nil
