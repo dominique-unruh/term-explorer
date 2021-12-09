@@ -1,0 +1,10 @@
+# -*- shell-script -*- :mode=shellscript:
+
+#for jar in "$COMPONENT"/dependencies/*.jar; do
+#  echo $jar
+#  classpath $jar
+#done
+
+classpath "$COMPONENT/term-explorer-component.jar"
+
+isabelle_scala_service de.unruh.termexplorer.TermExplorerComponent

@@ -1,42 +1,53 @@
+package de.unruh.termexplorer
+
 import de.unruh.isabelle.control.Isabelle
 import de.unruh.isabelle.control.Isabelle.Setup
-import de.unruh.isabelle.pure.{Abs, App, Context, TFree, Term, Typ, Type}
+import de.unruh.isabelle.control.IsabelleComponent.isabelle
+import de.unruh.isabelle.pure._
 
-import java.awt.{Dimension, GridLayout}
+import java.awt.Dimension
+import java.awt.event.{KeyEvent, KeyListener}
 import java.nio.file.Path
 import java.util
-import javax.swing.{JFrame, JPanel, JScrollPane, JTree, WindowConstants}
 import javax.swing.tree.TreeNode
+import javax.swing.{JFrame, JScrollPane, JTree, WindowConstants}
 import scala.annotation.tailrec
-import scala.jdk.CollectionConverters._
-import scala.collection.immutable
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.util.Random
+import scala.jdk.CollectionConverters._
 
 class TermTree(root: Node) extends JTree(root) {
 }
 
 object Viewer {
-  def main(args: Array[String]): Unit = {
-    implicit val isabelle: Isabelle = new Isabelle(Setup(
-      isabelleHome = Path.of("/opt/Isabelle2021-1-RC5")))
-
-    val context = Context("Main")
-    val term = Term(context, "!x. x+1 = 1+(x::nat)")
+  def showViewer(isabelle: Isabelle, context: Context, term: Term): Unit = {
+    implicit val i : Isabelle = isabelle
 
     val root = new TermNode(term, context, null)
     val tree = new TermTree(root)
     val treeView = new JScrollPane(tree)
 
     val frame = new JFrame("Term Tree Demo")
-    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
+    frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE)
 
     frame.setPreferredSize(new Dimension(600,600))
 
     frame.add(treeView)
 
+    frame.addKeyListener(new KeyListener {
+      override def keyTyped(e: KeyEvent): Unit = println(e)
+      override def keyPressed(e: KeyEvent): Unit = println(e)
+      override def keyReleased(e: KeyEvent): Unit = println(e)
+    })
+
     frame.pack()
     frame.setVisible(true)
+  }
+  def main(args: Array[String]): Unit = {
+     implicit val isabelle: Isabelle = new Isabelle(Setup(
+      isabelleHome = Path.of("/opt/Isabelle2021-1-RC5")))
+    val context = Context("Main")
+    val term = Term(context, "!x. x+1 = 1+(x::nat)")
+    showViewer(isabelle, context, term)
   }
 }
 
